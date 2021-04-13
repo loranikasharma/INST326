@@ -84,17 +84,18 @@ class Game:
             Prints out the president the user is specifing
         """
     
-    def score(self,score,name):
+    def score(self,score,name,file):
         """
         Keeps track of all the scores of all players who haver ever played and
         updates the users specific score
         
         Attributes:
-            name (string)
-            score (int)
+            file (string): Name of the file where the leader booard is kept
+            name (string): The name of the user
+            score (int): The users score
         
         Side effects:
-            prints out the score of everyone who has played.
+            Updates the users score on the leaderboards.
         """
         
 def main():
@@ -104,3 +105,12 @@ def main():
     will be tracked. This is also where all of the funcitons/methods will be ran.
     """
 
+    def score_board(file):
+        """
+        Prints out the leader of board
+        Attributes:
+            file (string): The file where all of the socres are kept.
+        
+        Side effects:
+            prints out the leader boards
+        """        
