@@ -9,6 +9,8 @@ import pandas as pd
 df = pd.read_csv("INST326 FINAL_Presidents.csv")
 print df
 
+#Replace comment with a random number generator
+
 class User:
     """
     This class keeps track of the users attempts, name and score
@@ -114,3 +116,7 @@ def main():
         Side effects:
             prints out the leader boards
         """        
+
+#Replace this comment with parse_args function
+
+if __name__ == "__main__":
