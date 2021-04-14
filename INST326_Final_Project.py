@@ -1,13 +1,17 @@
+""" A fun guessing game where the user has to guess a President based off of
+information provided. 
+Reads in a csv file, turn into dataframe with pandas, Stores the user guesses
+to see if the've guessed correctly or incorrectly (providing hints for each 
+incorrect answer).
+"""
 # Group: Christian Thompson, Loranika Sharma, Christopher Marroquin, Jay Patel
 # INST326
 # Final Project
 
-#pandas
-#if statements
 import pandas as pd
 
-df = pd.read_csv("INST326 FINAL_Presidents.csv")
-print df
+#df = pd.read_csv("INST326 FINAL_Presidents.csv")
+#print df
 
 #Replace comment with a random number generator
 
@@ -53,15 +57,15 @@ class Game:
         """
         
     def guess(self,ser,player):
-    """
-    Is the guessing game
-    
-    Attributes:
-        ser(series): A column from the file
-        player (user): Is a user object
-    Side effects:
-        Increases score based on answer given.
-    """
+        """
+        Is the guessing game
+        
+        Attributes:
+            ser(series): A column from the file
+            player (user): Is a user object
+        Side effects:
+            Increases score based on answer given.
+        """
         
         
     def compare(self,ser1,ser2):
@@ -120,3 +124,5 @@ def main():
 #Replace this comment with parse_args function
 
 if __name__ == "__main__":
+    """
+    """
