@@ -72,10 +72,10 @@ class Game:
         """
         This class keeps track of the users attempts, name and score
     
-        Attributes:
+        Args:
             ser1(series): Name of user
             der2(series): Number of attempts
-        Side effects:
+        Returns:
             Prints out information regarding the presidents
         """
         
@@ -84,9 +84,9 @@ class Game:
         Allows the user to put in information about a president and get the president
         name.
         
-        Attributes:
+        Args:
             data_frame(data frame):The data frame consisting of all the presidents 
-        Side effects:
+        Returns:
             Prints out the president the user is specifing
         """
     
@@ -114,10 +114,10 @@ def main():
     def score_board(file):
         """
         Prints out the leader of board
-        Attributes:
+        Args:
             file (string): The file where all of the socres are kept.
         
-        Side effects:
+        Returns:
             prints out the leader boards
         """        
 
