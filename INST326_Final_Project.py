@@ -10,9 +10,6 @@ incorrect answer).
 
 import pandas as pd
 
-#df = pd.read_csv("INST326 FINAL_Presidents.csv")
-#print df
-
 #Replace comment with a random number generator
 
 class User:
@@ -45,7 +42,20 @@ class User:
 
 
 class Game:
+    """
+    This class keeps track of the game state and will compare values to the 
+    user class
     
+    Attributes:
+        name(String): Name of user
+        series(str): Number of attempts
+        score(int): The score of the user
+        name: president name
+        File: Csv file
+    Side Effects:
+        compares the user class to the game class to see if the correct 
+        president has been guessed
+    """
     def __init__(self,name):
         """
        Initializes the name of the game.
@@ -110,7 +120,8 @@ def main():
     user instance will be initiated. A file will be created where the users score
     will be tracked. This is also where all of the funcitons/methods will be ran.
     """
-
+    #df = pd.read_csv("INST326 FINAL_Presidents.csv")
+    #print df
     def score_board(file):
         """
         Prints out the leader of board
