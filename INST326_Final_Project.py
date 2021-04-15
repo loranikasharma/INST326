@@ -71,10 +71,10 @@ class Game:
         Is the guessing game
         
         Attributes:
-            ser(series): A column from the file
+            ser(series): A President name column from the file
             player (user): Is a user object
         Side effects:
-            Increases score based on answer given.
+            Increases score based on correct answer given.
         """
         
         
