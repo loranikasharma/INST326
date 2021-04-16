@@ -52,9 +52,6 @@ class Game:
         score(int): The score of the user
         name: president name
         File: Csv file
-    Side Effects:
-        compares the user class to the game class to see if the correct 
-        president has been guessed
     """
     def __init__(self,name):
         """
@@ -71,7 +68,7 @@ class Game:
         Is the guessing game
         
         Attributes:
-            ser(series): A President name column from the file
+            ser(series): A President name column from the file (exaplain stucture of DF)
             player (user): Is a user object
         Side effects:
             Increases score based on correct answer given.
