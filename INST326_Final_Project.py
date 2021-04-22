@@ -96,9 +96,11 @@ class Game:
                 player.score -= 2
             
         if score > 0:
-            print(f"Congrats! You won with a score of {score}!")
+            print(f"Congrats! You guessed {president.loc["Name of President"]} correctly\
+            and you won with a score of {player.score}!")
         else:
-            print("Sadly you lost! Better luck next time")
+            print(f"Sadly you lost! Better luck next time! The correct president was \
+            {president.loc["Name of President"]}")
         
     def compare(self,ser1,ser2):
         """
