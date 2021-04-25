@@ -64,7 +64,7 @@ class Game:
         Side effects:
             Initializes values
         """
-        self.name = name
+        game_name = self.name
         
     def guess(self,df,player):
         """
@@ -104,7 +104,7 @@ class Game:
         
     def compare(self,ser1,ser2):
         """
-        This class keeps track of the users attempts, name and score
+        This method keeps track of the users attempts, name and score
     
         Args:
             ser1(series): Name of user
@@ -112,6 +112,7 @@ class Game:
         Returns:
             Prints out information regarding the presidents
         """
+        
         
     def reverse(self,data_frame):
         """
