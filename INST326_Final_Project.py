@@ -32,15 +32,30 @@ class User:
         Side effects:
             Initializes values
         """
-    
+        self.name = name
+        self.score = score
     
     def get_score(self):
         """
         Allows the user see what their score is.
         
         Side effects:
-            prints out the score of the user.
+            returns the score of the player
         """
+        return self.score
+    
+    def sub_score(self,amount):
+        """
+        Allows for the players score to be subtracted.
+        
+        Args:
+            amount (int): The amount to subtract
+        Side effects:
+            returns the score of the player
+        """
+        temp = self.score - amount
+        self.score = temp
+        return self.score
 
 
 class Game:
@@ -64,7 +79,7 @@ class Game:
         Side effects:
             Initializes values
         """
-        game_name = self.name
+        self.name = name
         
     def guess(self,df,player):
         """
@@ -82,7 +97,7 @@ class Game:
         Once you reach 0 you lose and the correct answer will be shown. Good luck!")
 
         ran = random.randint(1,46)
-        president = df.loc[ran]
+        president = df.iloc[ran]
         l = [1,3,4,7,8,9]
 
         while player.score >0:
@@ -93,14 +108,13 @@ class Game:
             if guess.lower() == president.loc["Name of President"].lower():
                 break
             else:
-                player.score -= 2
+                player.sub_score(2)
             
-        if score > 0:
-            print(f"Congrats! You guessed {president.loc["Name of President"]} correctly\
-            and you won with a score of {player.score}!")
+        if player.get_score() > 0:
+            print(f"Congrats! You guessed {president.iloc[0]} correctly and you won with a score of {player.get_score()}!")
         else:
-            print(f"Sadly you lost! Better luck next time! The correct president was \
-            {president.loc["Name of President"]}")
+            print(f"Sadly you lost! Better luck next time! The correct president was\
+            {president.iloc[0]}")
         
     def compare(self,ser1,ser2):
         """
@@ -150,35 +164,35 @@ def main():
     df = pd.read_csv("Inst326_Presidents_Info.csv",index_col="Number President")
     
     print("Hello! Welcome to the game featuring all of the presidents of the United\
-          States! We here at Presidents INC are happy you cam to play. Before we\
-          get started please enter your full name and a name you would like to give\
-          to the game your about to play.")
+    States! We here at Presidents INC are happy you cam to play. Before we\
+    get started please enter your full name and a name you would like to give\
+    to the game your about to play.")
     
     name = input("Please enter your name: ")
     game_name = input("Please enter the name you wish to call this trial: ")
     game1 = Game(game_name)
     player = User(name,10)
     print("Now that you have entered the information. It is time for you to pick\
-        the game you want to play. The first is a guessing game where information of a \
-        random president will be given to you and you will have 3 guesses to guess\
-        the correct president. The second option is an interactive expericen where\
-        you will get to choose 2 presidents of the US and see how they differ. The third\
-        choice is when you get to give the information fo a president and we guess\
-        the president you are talking about.")
+    the game you want to play. The first is a guessing game where information of a\
+    random president will be given to you and you will have 3 guesses to guess\
+    the correct president. The second option is an interactive expericen where\
+    you will get to choose 2 presidents of the US and see how they differ. The third\
+    choice is when you get to give the information fo a president and we guess\
+    the president you are talking about.")
     
-    game_choice = input("Please type 1 for option 1, 2 for option 2 or 3 for option 3")
+    game_choice = input("Please type 1 for option 1, 2 for option 2 or 3 for option 3:")
     again = 1
-    while game_choice <= 0 or game_choice > 3:
-         game_choice = input("Please type 1 for option 1, 2 for option 2 or 3 for option 3")
+    while int(game_choice) <= 0 or int(game_choice) > 3:
+         game_choice = input("Please type 1 for option 1, 2 for option 2 or 3 for option 3:")
     
     while again == 1:
-        if game_choice == 1:
+        if int(game_choice) == 1:
             game1.guess(df,player)
             game1.score(player.score,player.name,scoreboard_file)
-        elif game_choice == 2:
-            
-        elif game_choice == 3:
-        
+        elif int(game_choice) == 2:
+            print("do work")
+        elif int(game_choice) == 3:
+            print("do work")
         again = input("Would you like to play again? Type 1 for yes or 0 for no: ")
     
     scoreboard_file.close()
