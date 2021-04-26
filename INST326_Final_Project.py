@@ -118,7 +118,9 @@ class Game:
         
     def compare(self,ser1,ser2):
         """
-        This method keeps track of the users attempts, name and score
+        Compares 2 presidents. For example compares year elected, party affiliation
+        and so on. Also does a check to make sure the presidents chosen are properly
+        spelled or exists.
     
         Args:
             ser1(series): Name of user
