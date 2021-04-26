@@ -129,10 +129,10 @@ class Game:
         Returns:
             Prints out information regarding the presidents
         """
-        if president_one not in df["Name of President"] or president_two not in df["Name of President"]:
+        if president_one.iloc("Name of President") or president_two.iloc("Name of President"):
             print("Enter a valid president name!")
         else:
-            output = f" President one values: {df[president_one]} and President two values are {df[president_two]}"
+            output = f" President one values: {president_one.iloc[0]} and President two values are {president_two.iloc[0]}"
             return output
         
     def reverse(self,data_frame):
