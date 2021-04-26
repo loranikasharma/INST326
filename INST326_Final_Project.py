@@ -113,21 +113,27 @@ class Game:
         if player.get_score() > 0:
             print(f"Congrats! You guessed {president.iloc[0]} correctly and you won with a score of {player.get_score()}!")
         else:
-            print(f"Sadly you lost! Better luck next time! The correct president was {president.iloc[0]}")
+            print(f"Sadly you lost! Better luck next time! The correct president was\
+            {president.iloc[0]}")
         
-    def compare(self,ser1,ser2):
+    def compare(self,president_one,president_two):
         """
         Compares 2 presidents. For example compares year elected, party affiliation
         and so on. Also does a check to make sure the presidents chosen are properly
         spelled or exists.
     
         Args:
-            ser1(series): Name of user
-            der2(series): Number of attempts
+            president_one(series): First president
+            president_two(series): Second president
+            
         Returns:
             Prints out information regarding the presidents
         """
-        
+        if president_one not in df["Name of President"] or president_two not in df["Name of President"]:
+            print("Enter a valid president name!")
+        else:
+            output = f" President one values: {df[president_one]} and President two values are {df[president_two]}"
+            return output
         
     def reverse(self,data_frame):
         """
@@ -164,22 +170,22 @@ def main():
     scoreboard_file = open("ScoreBoard.txt","w+")
     df = pd.read_csv("Inst326_Presidents_Info.csv",index_col="Number President")
     
-    print(("Hello! Welcome to the game featuring all of the presidents ")+ 
-      ("of the United States! We here at Presidents INC are happy ")+ 
-      ("you came to play. Before we get started please enter your ")+
-      ("full name and a name you would like to give to the game your about to play."))
-
+    print("Hello! Welcome to the game featuring all of the presidents of the United\
+    States! We here at Presidents INC are happy you cam to play. Before we\
+    get started please enter your full name and a name you would like to give\
+    to the game your about to play.")
+    
     name = input("Please enter your name: ")
     game_name = input("Please enter the name you wish to call this trial: ")
     game1 = Game(game_name)
     player = User(name,10)
-    print(("Now that you have entered the information. It is time for you to pick ") +
-    ("the game you want to play. The first is a guessing game where information of a ") +
-    ("random president will be given to you and you will have 3 guesses to guess ") +
-    ("the correct president. The second option is an interactive expericen where ") +
-    ("you will get to choose 2 presidents of the US and see how they differ. The third ") +
-    ("choice is when you get to give the information fo a president and we guess ") +
-    ("the president you are talking about."))
+    print("Now that you have entered the information. It is time for you to pick\
+    the game you want to play. The first is a guessing game where information of a\
+    random president will be given to you and you will have 3 guesses to guess\
+    the correct president. The second option is an interactive expericen where\
+    you will get to choose 2 presidents of the US and see how they differ. The third\
+    choice is when you get to give the information fo a president and we guess\
+    the president you are talking about.")
     
     game_choice = input("Please type 1 for option 1, 2 for option 2 or 3 for option 3:")
     again = 1
