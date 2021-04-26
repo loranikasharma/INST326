@@ -145,6 +145,29 @@ class Game:
         Returns:
             Prints out the president the user is specifing
         """
+        df2 = pd.read_csv("Inst326_Presidents_Info.csv")
+        president_name = df2["Name of President"]
+        vice_president_name = df2["Vice President"]
+        #president_number = df2["Number President"]
+        #one_great_act = df2["One great act"]
+    
+        if game_choice == 3:
+            print("Welcome to game 3! Please provide information for the president you are thinking of, and I will try to guess the president")
+            first_letter = input("What does his first name start with?: ")
+            print("I see... Let me think of another question")
+            vice_first_letter = input("What does his vice president's first name start with?: ")
+            print("I think I have my guess... but to be sure...")
+            president_birthyear = input("Which year was he born? (format MM-DD-YYYY)?: ")
+            if president_birthyear == df2["Date of Birth"]:
+                print(f' Was {president_name} the president you were thinking of?')
+            else:
+                print("Can I try again?")
+            if first_letter in president_name:
+                print(f' Was {president_name} the president you were thinking of?')
+            else:
+                print("Can I try again?")
+            if vice_first_letter in vice_president_name:
+                print(f' Was {president_name} the president you were thinking of?')
     
     def score(self,score,name,file):
         """
@@ -212,7 +235,9 @@ def main():
         
         Returns:
             prints out the leader boards
-        """        
+        """
+        leaderboard = scoreboard_file.open().read()
+        print(leaderboard)        
 
 def parse_args(arglist):
     """Parse command-line arguments.
