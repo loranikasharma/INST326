@@ -202,7 +202,7 @@ class Game:
         #if vice_first_letter in vice_president_name:
             #print(f' Was {president_name} the president you were thinking of?')
     
-    def score(self,player,file, name, score):
+    def score(self,player,file):
         """
         Keeps track of all the scores of all players who have ever played and
         updates the users specific score
