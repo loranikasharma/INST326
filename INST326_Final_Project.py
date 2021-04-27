@@ -217,7 +217,7 @@ class Game:
             #print(add_scores)
         self.leaders[player.name] = player.get_score()
         #self.leaders['Score'] = score   
-        with open("ScoreBoard.csv", "w") as leaderboard:
+        with open("ScoreBoard.csv", "a") as leaderboard:
             writer = csv.writer(leaderboard)
             for key, value in self.leaders.items():
                 writer.writerow([key, value])
@@ -255,7 +255,7 @@ def main():
     will be tracked. This is also where all of the funcitons/methods will be ran.
     """
     
-    scoreboard_file = open("ScoreBoard.csv","w+")
+    #scoreboard_file = open("ScoreBoard.csv","w+")
     #scoreboard_file = open("ScoreBoard.txt","w+")
     df = pd.read_csv("Inst326_Presidents_Info.csv",index_col="Number President")
     
