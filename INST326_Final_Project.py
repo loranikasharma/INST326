@@ -115,8 +115,7 @@ class Game:
         if player.get_score() > 0:
             print(f"Congrats! You guessed {president.iloc[0]} correctly and you won with a score of {player.get_score()}!")
         else:
-            print(f"Sadly you lost! Better luck next time! The correct president was\
-            {president.iloc[0]}")
+            print(f"Sadly you lost! Better luck next time! The correct president was {president.iloc[0]}")
         
     def compare(self,president_one,president_two,file):
         """
@@ -135,14 +134,11 @@ class Game:
         
         df = pd.read_csv(file,index_col="Name of President")
         
-        if president_one not in df.values:
-            while president_one not in df.values:
-                president_one = input("Please enter a valid president for your first option:")
-        
-        if president_two not in df.values:
-            while president_two not in df.values:
-                president_two = input("Please enter a valid president for your second option:")
-        
+        #while president_one not in df.values:
+                #president_one = input("Please enter a valid president for your first option:")
+        #while president_two not in df.values:
+                #president_two = input("Please enter a valid president for your second option:")
+            
         print("Name of President: " + president_one + "\nNumber President: " + 
             str(df.loc[president_one]["Number President"]) + "\nDate of Birth: " +
             str(df.loc[president_one]["Date of Birth"]) + "\nState of Origin: " +
@@ -214,13 +210,12 @@ class Game:
         Side effects:
             Updates the users score on the leaderboards.
         """
-<<<<<<< HEAD
         #with open("ScoreBoard.csv", "w", newline ='') as leaderboard:
          #   scores = ['Name', 'Score']
           #  add_scores = csv.DictWriter(leaderboard, fieldnames=scores)
            # add_scores.writerow({'Name' : name, 'Score' : score})
             #print(add_scores)
-        self.leaders[name] = score
+        self.leaders[player.name] = player.get_score()
         #self.leaders['Score'] = score   
         with open("ScoreBoard.csv", "w") as leaderboard:
             writer = csv.writer(leaderboard)
@@ -235,11 +230,9 @@ class Game:
         #df_sort = df.sort(['Score'], ascending=[1, 0])
         #scoreboard_addition = {name : score}
         
-=======
-        scoreboard_file = open(file,"w+")
-        scoreboard_file.write(f"{player.name}: {player.get_score()}")
-        scoreboard_file.close()
->>>>>>> 81316d86e038138af0ad9a0445c5e5c8dc4e7026
+        #scoreboard_file = open(file,"w+")
+        #scoreboard_file.write(f"{player.name}: {player.get_score()}")
+        #scoreboard_file.close()
         
 def main():
     def score_board(file):
@@ -262,11 +255,8 @@ def main():
     will be tracked. This is also where all of the funcitons/methods will be ran.
     """
     
-<<<<<<< HEAD
     scoreboard_file = open("ScoreBoard.csv","w+")
-=======
     #scoreboard_file = open("ScoreBoard.txt","w+")
->>>>>>> 81316d86e038138af0ad9a0445c5e5c8dc4e7026
     df = pd.read_csv("Inst326_Presidents_Info.csv",index_col="Number President")
     
     print(("Hello! Welcome to the game featuring all of the presidents ")+ 
@@ -295,17 +285,20 @@ def main():
     while again == 1:
         if int(game_choice) == 1:
             game1.guess(df,player)
-            game1.score(player,"ScoreBoard.txt")
+            game1.score(player,"ScoreBoard.csv")
         elif int(game_choice) == 2:
             pres1 = input("Enter the first and last name of the first president you want to compare:")
             pres2 = input("Enter the first and last name of the second president you want to compare:")
+            while pres1 not in df.values:
+                pres1 = input("Please enter a valid president for your first option:")
+            while pres2 not in df.values:
+                pres2 = input("Please enter a valid president for your second option:")
             game1.compare(pres1,pres2,"Inst326_Presidents_Info.csv")
         elif int(game_choice) == 3:
             game1.reverse("Inst326_Presidents_Info.csv")
         again = input("Would you like to play again? Type 1 for yes or 0 for no: ")
     
-    game1.score(player,"ScoreBoard.txt")
-    score_board("ScoreBoard.txt")
+    score_board("ScoreBoard.csv")
        
 
 def parse_args(arglist):
