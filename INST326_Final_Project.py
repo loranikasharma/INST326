@@ -94,9 +94,9 @@ class Game:
             Decreases score based on correct answer given.
         """
         
-        print(f"Hello {player.name}. Welcome to the guessing game. The max number\
-        of points you can get is 10 points. For every wrong answer 2 points will be subtracted. \
-        Once you reach 0 you lose and the correct answer will be shown. Good luck!")
+        print(("Hello") + player.name + (". Welcome to the guessing game. The max number") +
+        ("of points you can get is 10 points. For every wrong answer 2 points will be subtracted.") +
+        ("Once you reach 0 you lose and the correct answer will be shown. Good luck!"))
 
         ran = random.randint(1,46)
         president = df.iloc[ran]
@@ -297,7 +297,10 @@ def main():
         elif int(game_choice) == 3:
             game1.reverse("Inst326_Presidents_Info.csv")
         again = input("Would you like to play again? Type 1 for yes or 0 for no: ")
-    
+        again = int(again)
+        game_choice = input("Please type 1 for option 1, 2 for option 2 or 3 for option 3:")
+        game_choice = int(game_choice)
+        
     score_board("ScoreBoard.csv")
        
 
