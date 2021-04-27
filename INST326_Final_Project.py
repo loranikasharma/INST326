@@ -10,6 +10,7 @@ incorrect answer).
 
 import pandas as pd
 import random
+import csv
 
 #Replace comment with a random number generator
 
@@ -80,6 +81,7 @@ class Game:
             Initializes values
         """
         self.name = name
+        self.leaders = {}
         
     def guess(self,df,player):
         """
@@ -182,6 +184,26 @@ class Game:
         Side effects:
             Updates the users score on the leaderboards.
         """
+        #with open("ScoreBoard.csv", "w", newline ='') as leaderboard:
+         #   scores = ['Name', 'Score']
+          #  add_scores = csv.DictWriter(leaderboard, fieldnames=scores)
+           # add_scores.writerow({'Name' : name, 'Score' : score})
+            #print(add_scores)
+        self.leaders[name] = score
+        #self.leaders['Score'] = score   
+        with open("ScoreBoard.csv", "w") as leaderboard:
+            writer = csv.writer(leaderboard)
+            for key, value in self.leaders.items():
+                writer.writerow([key, value])
+            #scores = ['Name', 'Score']
+
+            #add_scores = csv.DictWriter(self.leaders, fieldnames=scores)
+            #writerow(self.leaders)
+            #print(add_scores)
+        #df = pd.read_csv(file)
+        #df_sort = df.sort(['Score'], ascending=[1, 0])
+        #scoreboard_addition = {name : score}
+        
         
 def main():
     """
@@ -190,7 +212,7 @@ def main():
     will be tracked. This is also where all of the funcitons/methods will be ran.
     """
     
-    scoreboard_file = open("ScoreBoard.txt","w+")
+    scoreboard_file = open("ScoreBoard.csv","w+")
     df = pd.read_csv("Inst326_Presidents_Info.csv",index_col="Number President")
     
     print("Hello! Welcome to the game featuring all of the presidents of the United\
