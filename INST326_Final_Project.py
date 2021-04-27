@@ -131,7 +131,7 @@ class Game:
             Prints out information regarding the presidents
         """
         
-        df = pd.read_csv("Inst326_Presidents_Info.csv",index_col="Name of President")
+        df = pd.read_csv(file,index_col="Name of President")
         
         if president_one not in df.values:
             while president_one not in df.values:
@@ -172,10 +172,11 @@ class Game:
         name.
         
         Args:
-            data_frame(data frame):The data frame consisting of all the presidents 
+            file(string):Path to the file
         Returns:
             Prints out the president the user is specifing
         """
+        df2 = pd.read_csv("Inst326_Presidents_Info.csv")
         president_name = df2["Name of President"]
         vice_president_name = df2["Vice President"]
         #president_number = df2["Number President"]
@@ -187,45 +188,62 @@ class Game:
         vice_first_letter = input("What does his vice president's first name start with?: ")
         print("I think I have my guess... but to be sure...")
         president_birthyear = input("Which year was he born? (format MM-DD-YYYY)?: ")
-        if president_birthyear == df2["Date of Birth"]:
-            print(f' Was {president_name} the president you were thinking of?')
+        
+        if president_birthyear in df2.values:
+            print(f' Was {df2[df2["Date of Birth"] == date]["Name of President"]} the president you were thinking of?')
         else:
             print("Can I try again?")
-        if first_letter in president_name:
-            print(f' Was {president_name} the president you were thinking of?')
-        else:
-            print("Can I try again?")
-        if vice_first_letter in vice_president_name:
-            print(f' Was {president_name} the president you were thinking of?')
+        #if first_letter in president_name:
+            #print(f' Was {president_name} the president you were thinking of?')
+        #else:
+            #print("Can I try again?")
+        #if vice_first_letter in vice_president_name:
+            #print(f' Was {president_name} the president you were thinking of?')
     
-    def score(self,score,name,file):
+    def score(self,player,file):
         """
         Keeps track of all the scores of all players who have ever played and
         updates the users specific score
         
         Attributes:
             file (string): Name of the file where the leader booard is kept
-            name (string): The name of the user
-            score (int): The users score
+            player (User): A user object
         
         Side effects:
             Updates the users score on the leaderboards.
         """
+        scoreboard_file = open(file,"w+")
+        scoreboard_file.write(f"{player.name}: {player.get_score()}")
+        scoreboard_file.close()
         
 def main():
+    def score_board(file):
+        """
+        Prints out the leader board
+        Args:
+            file (string): The file where all of the socres are kept.
+        
+        Returns:
+            prints out the leader boards
+        """
+        with open(file,"r",encoding= "utf -8") as f:
+            for line in f:
+                print(line)  
+    
+    
     """
     In the main function the CSV file will be opened. The game instacne and the 
     user instance will be initiated. A file will be created where the users score
     will be tracked. This is also where all of the funcitons/methods will be ran.
     """
     
-    scoreboard_file = open("ScoreBoard.txt","w+")
+    #scoreboard_file = open("ScoreBoard.txt","w+")
     df = pd.read_csv("Inst326_Presidents_Info.csv",index_col="Number President")
     
     print(("Hello! Welcome to the game featuring all of the presidents ")+ 
       ("of the United States! We here at Presidents INC are happy ")+ 
       ("you came to play. Before we get started please enter your ")+
-      ("full name and a name you would like to give to the game your about to play."))
+      ("full name and a name you would like to give to the game your about to play.\n"))
     
     name = input("Please enter your name: ")
     game_name = input("Please enter the name you wish to call this trial: ")
@@ -238,7 +256,7 @@ def main():
     ("the correct president. The second option is an interactive expericen where ") +
     ("you will get to choose 2 presidents of the US and see how they differ. The third ") +
     ("choice is when you get to give the information fo a president and we guess ") +
-    ("the president you are talking about."))
+    ("the president you are talking about.\n"))
     
     game_choice = input("Please type 1 for option 1, 2 for option 2 or 3 for option 3:")
     again = 1
@@ -248,28 +266,18 @@ def main():
     while again == 1:
         if int(game_choice) == 1:
             game1.guess(df,player)
-            game1.score(player.score,player.name,scoreboard_file)
+            game1.score(player,"ScoreBoard.txt")
         elif int(game_choice) == 2:
             pres1 = input("Enter the first and last name of the first president you want to compare:")
             pres2 = input("Enter the first and last name of the second president you want to compare:")
             game1.compare(pres1,pres2,"Inst326_Presidents_Info.csv")
         elif int(game_choice) == 3:
-            game1.reverse(df)
+            game1.reverse("Inst326_Presidents_Info.csv")
         again = input("Would you like to play again? Type 1 for yes or 0 for no: ")
     
-    scoreboard_file.close()
-    
-    def score_board(file):
-        """
-        Prints out the leader board
-        Args:
-            file (string): The file where all of the socres are kept.
-        
-        Returns:
-            prints out the leader boards
-        """
-        leaderboard = scoreboard_file.open().read()
-        print(leaderboard)        
+    game1.score(player,"ScoreBoard.txt")
+    score_board("ScoreBoard.txt")
+       
 
 def parse_args(arglist):
     """Parse command-line arguments.
