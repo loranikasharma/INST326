@@ -175,28 +175,27 @@ class Game:
             Prints out the president the user is specifing
         """
         df2 = pd.read_csv("Inst326_Presidents_Info.csv")
-        president_name = df2["Name of President"]
-        vice_president_name = df2["Vice President"]
-        #president_number = df2["Number President"]
-        #one_great_act = df2["One great act"]
-    
+        
         print("Welcome to game 3! Please provide information for the president you are thinking of, and I will try to guess the president")
-        first_letter = input("What does his first name start with?: ")
-        print("I see... Let me think of another question")
-        vice_first_letter = input("What does his vice president's first name start with?: ")
+        first_question = input("What Party are they affiliated with?: ")
+        if first_question.lower() == "Democrat":
+            temp = df2[df2["Party Affiliation"] == "Democrat"]
+            first_guess = (temp.iloc[0]["Name of President"])
+            print (f'Is {first_guess} the President you were thinking of?')
+        elif first_question.lower() == "Republican":
+            temp = df2[df2["Party Affiliation"] == "Republican"]
+            first_guess = (temp.iloc[0]["Name of President"])
+            print (f'Is {first_guess} the President you were thinking of?')
+
         print("I think I have my guess... but to be sure...")
         president_birthyear = input("Which year was he born? (format MM-DD-YYYY)?: ")
-        
+
         if president_birthyear in df2.values:
-            print(f' Was {df2[df2["Date of Birth"] == date]["Name of President"]} the president you were thinking of?')
+            temp = df2[df2["Date of Birth"] == president_birthyear]
+            guess = (temp.iloc[0]["Name of President"])
+            print(f' Was {guess} the president you were thinking of?')
         else:
             print("Can I try again?")
-        #if first_letter in president_name:
-            #print(f' Was {president_name} the president you were thinking of?')
-        #else:
-            #print("Can I try again?")
-        #if vice_first_letter in vice_president_name:
-            #print(f' Was {president_name} the president you were thinking of?')
     
     def score(self,player,file):
         """
