@@ -235,6 +235,11 @@ class Game:
         
         
 def main():
+    """
+    In the main function the CSV file will be opened. The game instacne and the 
+    user instance will be initiated. A file will be created where the users score
+    will be tracked. This is also where all of the funcitons/methods will be ran.
+    """
     def score_board(file):
         """
         Prints out the leader board
@@ -247,14 +252,6 @@ def main():
         with open(file,"r",encoding= "utf -8") as f:
             for line in f:
                 print(line)  
-    
-    
-    """
-    In the main function the CSV file will be opened. The game instacne and the 
-    user instance will be initiated. A file will be created where the users score
-    will be tracked. This is also where all of the funcitons/methods will be ran.
-    """
-    
     
     df = pd.read_csv("Inst326_Presidents_Info.csv",index_col="Number President")
     
@@ -278,6 +275,7 @@ def main():
     
     game_choice = input("Please type 1 for option 1, 2 for option 2 or 3 for option 3:")
     again = 1
+    
     while int(game_choice) <= 0 or int(game_choice) > 3:
          game_choice = input("Please type 1 for option 1, 2 for option 2 or 3 for option 3:")
     
