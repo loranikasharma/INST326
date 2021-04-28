@@ -306,8 +306,9 @@ def main():
             game1.reverse("Inst326_Presidents_Info.csv")
         again = input("Would you like to play again? Type 1 for yes or 0 for no: ")
         again = int(again)
-        game_choice = input("Please type 1 for option 1, 2 for option 2 or 3 for option 3:")
-        game_choice = int(game_choice)
+        if again == 1:
+            game_choice = input("Please type 1 for option 1, 2 for option 2 or 3 for option 3:")
+            game_choice = int(game_choice)
         
     score_board("ScoreBoard.csv")
        
