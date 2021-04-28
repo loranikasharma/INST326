@@ -94,9 +94,9 @@ class Game:
             Decreases score based on correct answer given.
         """
         
-        print(f"Hello {player.name}. Welcome to the guessing game. The max number\
-        of points you can get is 10 points. For every wrong answer 2 points will be subtracted. \
-        Once you reach 0 you lose and the correct answer will be shown. Good luck!")
+        print(("Hello") + player.name + (". Welcome to the guessing game. The max number") +
+        ("of points you can get is 10 points. For every wrong answer 2 points will be subtracted.") +
+        ("Once you reach 0 you lose and the correct answer will be shown. Good luck!"))
 
         ran = random.randint(1,46)
         president = df.iloc[ran]
@@ -179,28 +179,36 @@ class Game:
             Prints out the president the user is specifing
         """
         df2 = pd.read_csv("Inst326_Presidents_Info.csv")
-        president_name = df2["Name of President"]
-        vice_president_name = df2["Vice President"]
-        #president_number = df2["Number President"]
-        #one_great_act = df2["One great act"]
-    
-        print("Welcome to game 3! Please provide information for the president you are thinking of, and I will try to guess the president")
-        first_letter = input("What does his first name start with?: ")
-        print("I see... Let me think of another question")
-        vice_first_letter = input("What does his vice president's first name start with?: ")
-        print("I think I have my guess... but to be sure...")
-        president_birthyear = input("Which year was he born? (format MM-DD-YYYY)?: ")
         
-        if president_birthyear in df2.values:
-            print(f' Was {df2[df2["Date of Birth"] == date]["Name of President"]} the president you were thinking of?')
+        print("Welcome to game 3! I Will guess the President You're thinking of by the information you provide")
+
+        first_question = input("What Party are they affiliated with?: ")
+        if first_question.lower() == "Democrat":
+            temp = df2[df2["Party Affiliation"] == "Democrat"]
+            first_guess = (temp.iloc[0]["Name of President"])
+            print (f'Is {first_guess} the President you were thinking of?')
+        elif first_question.lower() == "Republican":
+            temp = df2[df2["Party Affiliation"] == "Republican"]
+            first_guess = (temp.iloc[0]["Name of President"])
+            print (f'Is {first_guess} the President you were thinking of?')
+            
+        print("I think I have an idea..")
+
+        second_question = input("Which state were they born in?")
+        if second_question == "VA":
+            temp = df2[df2["State of Origin"] == "VA"]
+            second_guess = (temp.iloc[0]["Name of President"])
+            print (f'Is {second_guess} the President you were thinking of?')
+
+        print("I think I have my guess... but to be sure...")
+
+        third_question = input("Which year was he born? (format MM-DD-YYYY)?: ")
+        if third_question in df2.values:
+            temp = df2[df2["Date of Birth"] == third_question]
+            third_guess = (temp.iloc[0]["Name of President"])
+            print(f' Was {third_guess} the President you were thinking of?')
         else:
-            print("Can I try again?")
-        #if first_letter in president_name:
-            #print(f' Was {president_name} the president you were thinking of?')
-        #else:
-            #print("Can I try again?")
-        #if vice_first_letter in vice_president_name:
-            #print(f' Was {president_name} the president you were thinking of?')
+            print("Incorrect date format. Can we try again?")
     
     def score(self,player,file):
         """
@@ -219,8 +227,9 @@ class Game:
           #  add_scores = csv.DictWriter(leaderboard, fieldnames=scores)
            # add_scores.writerow({'Name' : name, 'Score' : score})
             #print(add_scores)
-        self.leaders[name] = score
-        with open("ScoreBoard.csv", "w") as leaderboard:
+        self.leaders[player.name] = player.get_score()
+        #self.leaders['Score'] = score   
+        with open("ScoreBoard.csv", "a") as leaderboard:
             writer = csv.writer(leaderboard)
             for key, value in self.leaders.items():
                 writer.writerow([key, value])
@@ -254,7 +263,8 @@ def main():
     will be tracked. This is also where all of the funcitons/methods will be ran.
     """
     
-    scoreboard_file = open("ScoreBoard.csv","w+")
+    #scoreboard_file = open("ScoreBoard.csv","w+")
+    #scoreboard_file = open("ScoreBoard.txt","w+")
     df = pd.read_csv("Inst326_Presidents_Info.csv",index_col="Number President")
     
     print(("Hello! Welcome to the game featuring all of the presidents ")+ 
@@ -291,9 +301,11 @@ def main():
         elif int(game_choice) == 3:
             game1.reverse("Inst326_Presidents_Info.csv")
         again = input("Would you like to play again? Type 1 for yes or 0 for no: ")
-    
-    game1.score(player,"ScoreBoard.txt")
-    score_board("ScoreBoard.txt")
+        again = int(again)
+        game_choice = input("Please type 1 for option 1, 2 for option 2 or 3 for option 3:")
+        game_choice = int(game_choice)
+        
+    score_board("ScoreBoard.csv")
        
 
 def parse_args(arglist):
