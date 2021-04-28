@@ -115,7 +115,8 @@ class Game:
         if player.get_score() > 0:
             print(f"Congrats! You guessed {president.iloc[0]} correctly and you won with a score of {player.get_score()}!")
         else:
-            print(f"Sadly you lost! Better luck next time! The correct president was {president.iloc[0]}")
+            print(f"Sadly you lost! Better luck next time! The correct president was\
+            {president.iloc[0]}")
         
     def compare(self,president_one,president_two,file):
         """
@@ -134,11 +135,14 @@ class Game:
         
         df = pd.read_csv(file,index_col="Name of President")
         
-        #while president_one not in df.values:
-                #president_one = input("Please enter a valid president for your first option:")
-        #while president_two not in df.values:
-                #president_two = input("Please enter a valid president for your second option:")
-            
+        if president_one not in df.values:
+            while president_one not in df.values:
+                president_one = input("Please enter a valid president for your first option:")
+        
+        if president_two not in df.values:
+            while president_two not in df.values:
+                president_two = input("Please enter a valid president for your second option:")
+        
         print("Name of President: " + president_one + "\nNumber President: " + 
             str(df.loc[president_one]["Number President"]) + "\nDate of Birth: " +
             str(df.loc[president_one]["Date of Birth"]) + "\nState of Origin: " +
@@ -178,33 +182,37 @@ class Game:
         
         print("Welcome to game 3! I Will guess the President You're thinking of by the information you provide")
 
-        first_question = input("What Party are they affiliated with?: ")
-        if first_question.lower() == "Democrat":
-            temp = df2[df2["Party Affiliation"] == "Democrat"]
-            first_guess = (temp.iloc[0]["Name of President"])
-            print (f'Is {first_guess} the President you were thinking of?')
-        elif first_question.lower() == "Republican":
-            temp = df2[df2["Party Affiliation"] == "Republican"]
-            first_guess = (temp.iloc[0]["Name of President"])
-            print (f'Is {first_guess} the President you were thinking of?')
+        first_question = input("What Party are they affiliated with?(Please capitalize the first letter): ")
+        temp = df2[df2["Party Affiliation"] == first_question]
+        first_guess = (temp.iloc[0]["Name of President"])
+        comp_guess_1 = input(f'Is {first_guess} the President you were thinking of?')
+        if comp_guess_1 != "yes":
+            print("I think I have an idea..")
+
+            second_question = input("Which state were they born in?")
+            temp = df2[df2["State of Origin"] == second_question]
+            second_guess = (temp.iloc[1]["Name of President"])
+            comp_guess = input(f'Is {second_guess} the President you were thinking of?')
+            if comp_guess != "yes":
             
-        print("I think I have an idea..")
+                print("I think I have my guess... but to be sure...")
 
-        second_question = input("Which state were they born in?")
-        if second_question == "VA":
-            temp = df2[df2["State of Origin"] == "VA"]
-            second_guess = (temp.iloc[0]["Name of President"])
-            print (f'Is {second_guess} the President you were thinking of?')
-
-        print("I think I have my guess... but to be sure...")
-
-        third_question = input("Which year was he born? (format MM-DD-YYYY)?: ")
-        if third_question in df2.values:
-            temp = df2[df2["Date of Birth"] == third_question]
-            third_guess = (temp.iloc[0]["Name of President"])
-            print(f' Was {third_guess} the President you were thinking of?')
+                third_question = input("Which year was he born? (format MM-DD-YYYY)?: ")
+                if third_question in df2.values:
+                    temp = df2[df2["Date of Birth"] == third_question]
+                    third_guess = (temp.iloc[0]["Name of President"])
+                    comp_guess_3 = input(f' Was {third_guess} the President you were thinking of?')
+                    if comp_guess_3 != "yes":
+                        print("I'll try better next time. Good game!")
+                    else:
+                        print("Good game!")
+                else:
+                    print("Incorrect date format. Can we try again?")
+            else:
+                print("Good game!")
+                    
         else:
-            print("Incorrect date format. Can we try again?")
+            print("Good game!")
     
     def score(self,player,file):
         """
@@ -229,16 +237,12 @@ class Game:
             writer = csv.writer(leaderboard)
             for key, value in self.leaders.items():
                 writer.writerow([key, value])
-            #scores = ['Name', 'Score']
 
-            #add_scores = csv.DictWriter(self.leaders, fieldnames=scores)
-            #writerow(self.leaders)
-            #print(add_scores)
         #df = pd.read_csv(file)
         #df_sort = df.sort(['Score'], ascending=[1, 0])
         #scoreboard_addition = {name : score}
         
-        #scoreboard_file = open(file,"w+")
+       # scoreboard_file = open(file,"w+")
         #scoreboard_file.write(f"{player.name}: {player.get_score()}")
         #scoreboard_file.close()
         
@@ -293,14 +297,10 @@ def main():
     while again == 1:
         if int(game_choice) == 1:
             game1.guess(df,player)
-            game1.score(player,"ScoreBoard.csv")
+            game1.score(player,"ScoreBoard.txt")
         elif int(game_choice) == 2:
             pres1 = input("Enter the first and last name of the first president you want to compare:")
             pres2 = input("Enter the first and last name of the second president you want to compare:")
-            while pres1 not in df.values:
-                pres1 = input("Please enter a valid president for your first option:")
-            while pres2 not in df.values:
-                pres2 = input("Please enter a valid president for your second option:")
             game1.compare(pres1,pres2,"Inst326_Presidents_Info.csv")
         elif int(game_choice) == 3:
             game1.reverse("Inst326_Presidents_Info.csv")
