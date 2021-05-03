@@ -5,6 +5,10 @@ from unittest import mock
 import pandas as pd
 
 def test_guess():
+    """
+    Tests to make sure that the guess function works, that the user score is reduced
+    and that the dataframe works.
+    """
     player = pro.User("Chris",10)
     game = pro.Game("Trial 1")
     df = pd.read_csv("Inst326_Presidents_Info.csv",index_col="Number President")
@@ -20,15 +24,16 @@ def test_guess():
     assert df.iloc[45]["Vice President"] == "Kamala Harris"
     assert df.iloc[18]["Name of President"] == "Rutherford Hayes"
 
-def test_compare(capsys):
+def test_compare():
+    """
+    Tests the compare method to make sure that the out put is correct
+    """
     game = pro.Game("Trial 1")
     df = pd.read_csv("Inst326_Presidents_Info.csv",index_col="Name of President")
     president_one = "George Washington"
     president_two = "John Adams"
-    game.compare("George Washington","John Adams","Inst326_Presidents_Info.csv")
-    outerr = capsys.readouterr()
-    out = outerr.out
-    assert out == ("Name of President: " + president_one + "\nNumber President: " + 
+    temp = game.compare("George Washington","John Adams","Inst326_Presidents_Info.csv")
+    assert temp == ("Name of President: " + president_one + "\nNumber President: " + 
             str(df.loc[president_one]["Number President"]) + "\nDate of Birth: " +
             str(df.loc[president_one]["Date of Birth"]) + "\nState of Origin: " +
             str(df.loc[president_one]["State of Origin"]) + "\nParty Affiliation: " +
