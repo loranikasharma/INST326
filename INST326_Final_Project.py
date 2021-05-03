@@ -129,34 +129,40 @@ class Game:
             file (String): path to the file
             
         Returns:
-            Prints out information regarding the presidents
+            The information regarding the presidents
         """
-        
         df = pd.read_csv(file,index_col="Name of President") 
-            
-        print("Name of President: " + president_one + "\nNumber President: " + 
-            str(df.loc[president_one]["Number President"]) + "\nDate of Birth: " +
-            str(df.loc[president_one]["Date of Birth"]) + "\nState of Origin: " +
-            str(df.loc[president_one]["State of Origin"]) + "\nParty Affiliation: " +
-            str(df.loc[president_one]["Party Affiliation"]) + "\nVice President: " +
-            str(df.loc[president_one]["Vice President"]) + "\nFirst Lady: " + 
-            str(df.loc[president_one]["First Lady"]) + "\nNumber of Years Served: " +
-            str(df.loc[president_one]["Number of years served"]) + "\nNumber of Terms Served: "+
-            str(df.loc[president_one]["Number of terms served"]) + "\nOne Great Act: " +
-            str(df.loc[president_one]["One great act"]) + "\nDate of Death: " +
-            str(df.loc[president_one]["Date of death"]) + "\n" +
-            "\nName of President: " + president_two + "\nNumber President: " + 
-            str(df.loc[president_two]["Number President"]) + "\nDate of Birth: " +
-            str(df.loc[president_two]["Date of Birth"]) + "\nState of Origin: " +
-            str(df.loc[president_two]["State of Origin"]) + "\nParty Affiliation: " +
-            str(df.loc[president_two]["Party Affiliation"]) + "\nVice President: " +
-            str(df.loc[president_two]["Vice President"]) + "\nFirst Lady: " + 
-            str(df.loc[president_two]["First Lady"]) + "\nNumber of Years Served: " +
-            str(df.loc[president_two]["Number of years served"]) + "\nNumber of Terms Served: "+
-            str(df.loc[president_two]["Number of terms served"]) + "\nOne Great Act: " +
-            str(df.loc[president_two]["One great act"]) + "\nDate of Death: " +
-            str(df.loc[president_two]["Date of death"]))
-            
+        while True:
+            try:
+                temp = ("Name of President: " + president_one + "\nNumber President: " + 
+                    str(df.loc[president_one]["Number President"]) + "\nDate of Birth: " +
+                    str(df.loc[president_one]["Date of Birth"]) + "\nState of Origin: " +
+                    str(df.loc[president_one]["State of Origin"]) + "\nParty Affiliation: " +
+                    str(df.loc[president_one]["Party Affiliation"]) + "\nVice President: " +
+                    str(df.loc[president_one]["Vice President"]) + "\nFirst Lady: " + 
+                    str(df.loc[president_one]["First Lady"]) + "\nNumber of Years Served: " +
+                    str(df.loc[president_one]["Number of years served"]) + "\nNumber of Terms Served: "+
+                    str(df.loc[president_one]["Number of terms served"]) + "\nOne Great Act: " +
+                    str(df.loc[president_one]["One great act"]) + "\nDate of Death: " +
+                    str(df.loc[president_one]["Date of death"]) + "\n" +
+                    "\nName of President: " + president_two + "\nNumber President: " + 
+                    str(df.loc[president_two]["Number President"]) + "\nDate of Birth: " +
+                    str(df.loc[president_two]["Date of Birth"]) + "\nState of Origin: " +
+                    str(df.loc[president_two]["State of Origin"]) + "\nParty Affiliation: " +
+                    str(df.loc[president_two]["Party Affiliation"]) + "\nVice President: " +
+                    str(df.loc[president_two]["Vice President"]) + "\nFirst Lady: " + 
+                    str(df.loc[president_two]["First Lady"]) + "\nNumber of Years Served: " +
+                    str(df.loc[president_two]["Number of years served"]) + "\nNumber of Terms Served: "+
+                    str(df.loc[president_two]["Number of terms served"]) + "\nOne Great Act: " +
+                    str(df.loc[president_two]["One great act"]) + "\nDate of Death: " +
+                    str(df.loc[president_two]["Date of death"]))
+                break
+            except KeyError:
+                pass
+            print("One of the presidents is incorrect please re-enter both president names correcly")
+            president_one = input("President 1: ")
+            president_two = input("President 2: ")
+        return temp    
         
     def reverse(self,df2):
         """
@@ -277,7 +283,7 @@ def main():
         elif int(game_choice) == 2:
             pres1 = input("Enter the first and last name of the first president you want to compare:")
             pres2 = input("Enter the first and last name of the second president you want to compare:")
-            game1.compare(pres1,pres2,"Inst326_Presidents_Info.csv")
+            print(game1.compare(pres1,pres2,"Inst326_Presidents_Info.csv"))
         elif int(game_choice) == 3:
             game1.reverse("Inst326_Presidents_Info.csv")
         again = input("Would you like to play again? Type 1 for yes or 0 for no: ")
