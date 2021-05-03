@@ -93,9 +93,9 @@ class Game:
             Decreases score based on correct answer given.
         """
         
-        print(("Hello") + player.name + (". Welcome to the guessing game. The max number") +
+        print(("Hello ") + player.name + (". Welcome to the guessing game. The max number ") +
         ("of points you can get is 10 points. For every wrong answer 2 points will be subtracted.") +
-        ("Once you reach 0 you lose and the correct answer will be shown. Good luck!"))
+        (" Once you reach 0 you lose and the correct answer will be shown. Good luck!"))
 
         ran = random.randint(1,46)
         president = df.iloc[ran]
@@ -132,16 +132,8 @@ class Game:
             Prints out information regarding the presidents
         """
         
-        df = pd.read_csv(file,index_col="Name of President")
-        
-        if president_one not in df.values:
-            while president_one not in df.values:
-                president_one = input("Please enter a valid president for your first option:")
-        
-        if president_two not in df.values:
-            while president_two not in df.values:
-                president_two = input("Please enter a valid president for your second option:")
-        
+        df = pd.read_csv(file,index_col="Name of President") 
+            
         print("Name of President: " + president_one + "\nNumber President: " + 
             str(df.loc[president_one]["Number President"]) + "\nDate of Birth: " +
             str(df.loc[president_one]["Date of Birth"]) + "\nState of Origin: " +
@@ -152,9 +144,8 @@ class Game:
             str(df.loc[president_one]["Number of years served"]) + "\nNumber of Terms Served: "+
             str(df.loc[president_one]["Number of terms served"]) + "\nOne Great Act: " +
             str(df.loc[president_one]["One great act"]) + "\nDate of Death: " +
-            str(df.loc[president_one]["Date of death"]) + "\n")
-
-        print("Name of President: " + president_two + "\nNumber President: " + 
+            str(df.loc[president_one]["Date of death"]) + "\n" +
+            "\nName of President: " + president_two + "\nNumber President: " + 
             str(df.loc[president_two]["Number President"]) + "\nDate of Birth: " +
             str(df.loc[president_two]["Date of Birth"]) + "\nState of Origin: " +
             str(df.loc[president_two]["State of Origin"]) + "\nParty Affiliation: " +
