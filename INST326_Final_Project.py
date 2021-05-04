@@ -278,6 +278,7 @@ def main():
     
     while again == 1:
         if int(game_choice) == 1:
+            player.score = 10
             game1.guess(df,player)
             game1.score(player,"ScoreBoard.txt")
         elif int(game_choice) == 2:
