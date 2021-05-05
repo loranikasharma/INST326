@@ -72,3 +72,26 @@ def test_reverse():
         assert pro.reverse("Democrat", "NJ", "03-18-1837") == "grover cleveland" 
         assert pro.reverse('Democrat', "MO", "05-08-1884") == "harry truman" 
         assert pro.reverse('Republican', "TX", "07-06-1946") == "George W. Bush" or "George Bush" or "george w. bush"
+
+def test_get_score():
+    player = pro.User("Jay",10)
+    assert player.get_score() == 10
+    player = pro.User("James",8)
+    assert player.get_score() == 8
+    player = pro.User("Justin",5)
+    assert player.get_score() == 5
+    player = pro.User("Julien",50)
+    assert player.get_score() == 50
+    player = pro.User("Eric",12)
+    assert player.get_score() == 12
+    player = pro.User("Milton",0)
+    assert player.get_score() == 0
+    player = pro.User("Guy",9)
+    assert player.get_score() == 9
+    player = pro.User("Kennedy",20)
+    assert player.get_score() == 20
+    player = pro.User("Tom",2)
+    assert player.get_score() == 2
+    player = pro.User("Ken",6)
+    assert player.get_score() == 6
+
