@@ -180,7 +180,8 @@ class Game:
 
         first_question = input("What Party are they affiliated with?(Please capitalize the first letter): ")
         temp = df2[df2["Party Affiliation"] == first_question]
-        first_guess = (temp.iloc[0]["Name of President"])
+        #first_guess = (temp.iloc[0]["Name of President"])
+        first_guess = temp["Name of President"].iloc[0]
         comp_guess_1 = input(f'Is {first_guess} the President you were thinking of?(yes or no)')
         if comp_guess_1 != "yes":
             print("I think I have an idea..")
