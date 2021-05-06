@@ -163,7 +163,16 @@ class Game:
             president_one = input("President 1: ")
             president_two = input("President 2: ")
         return temp    
-        
+    
+    def questions(self, question,col,df):
+        answer_1 = input(question)
+        temp = df[df[col] == answer_1]
+        print(answer_1)
+        print(temp)
+        first_guess = temp["Name of President"].iloc[0]
+        comp_guess_1 = input(f'Is {first_guess} the President you were thinking of?(yes or no)')
+        return comp_guess_1, temp
+    
     def reverse(self,filepath):
         """
         Allows the user to put in information about a president and get the president
@@ -171,45 +180,28 @@ class Game:
         
         Args:
             file(string):Path to the file
-        Returns:
+        Side Effect:
             Prints out the president the user is specifing
+        Returns:
+            None
         """
+        question_col = [('What Party are they Affiliated with? (Please capitalize the first letter): ',"Party Affiliation","I think I have an idea.."),
+                        ('Which state were they born in?',"State of Origin","I think I have my guess... but to be sure..."),
+                        ('What is his date of birth (format MM-DD-YYYY)?: ',"Date of Birth","I'll try better next time. Good game!")]
+
         df2 = pd.read_csv(filepath)
-        
         print("Welcome to game 3! I Will guess the President You're thinking of by the information you provide")
-
-        first_question = input("What Party are they affiliated with?(Please capitalize the first letter): ")
-        temp = df2[df2["Party Affiliation"] == first_question]
-        #first_guess = (temp.iloc[0]["Name of President"])
-        first_guess = temp["Name of President"].iloc[0]
-        comp_guess_1 = input(f'Is {first_guess} the President you were thinking of?(yes or no)')
-        if comp_guess_1 != "yes":
-            print("I think I have an idea..")
-
-            second_question = input("Which state were they born in?")
-            temp = df2[df2["State of Origin"] == second_question]
-            second_guess = (temp.iloc[1]["Name of President"])
-            comp_guess = input(f'Is {second_guess} the President you were thinking of?(yes or no)')
-            if comp_guess != "yes":
-            
-                print("I think I have my guess... but to be sure...")
-
-                third_question = input("Which year was he born? (format MM-DD-YYYY)?: ")
-                if third_question in df2.values:
-                    temp = df2[df2["Date of Birth"] == third_question]
-                    third_guess = (temp.iloc[0]["Name of President"])
-                    comp_guess_3 = input(f' Was {third_guess} the President you were thinking of?(yes or no)')
-                    if comp_guess_3 != "yes":
-                        print("I'll try better next time. Good game!")
-                    else:
-                        print("Good game!")
-                else:
-                    print("Incorrect date format. Can we try again?")
-            else:
-                print("Good game!")
-                    
-        else:
-            print("Good game!")
+        
+        for question, col, response in question_col:
+            variable1, df2 = self.questions(question,col,df2)
+            if variable1 == "yes":
+                print('Good game!')
+                return
+            elif variable1 == "no":
+                print (response)
+                
+    
+     
     
     def score(self,player,file):
         """
