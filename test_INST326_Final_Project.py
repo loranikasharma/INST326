@@ -56,6 +56,14 @@ def test_compare():
             str(df.loc[president_two]["Number of terms served"]) + "\nOne Great Act: " +
             str(df.loc[president_two]["One great act"]) + "\nDate of Death: " +
             str(df.loc[president_two]["Date of death"]))
+
+def test_questions():
+    game1 = pro.Game("Trial 1")
+    with mock.patch("builtins.input", side_effect= ["Democratic Party","no"]):
+        df = pd.read_csv("Inst326_Presidents_Info.csv")
+        print(df)
+        var1, var2 = game1.questions("","Party Affiliation", df)
+    
     
 # def test_reverse(capsys):
     
@@ -65,7 +73,7 @@ def test_compare():
     
 #     game1 = pro.Game("Trial 1")
     
-#     with mock.patch("builtins.input", side_effects= ["Democratic Party", "no", "NJ", "no", "03-18-1837", "yes"]):
+#     with mock.patch("builtins.input", side_effect= ["Democratic Party", "no", "NJ", "no", "03-18-1837", "yes"]):
 #         game1.reverse("Inst326_Presidents_Info.csv")
 #         outerr = capsys.readouterr()
 #         out = outerr.out()
