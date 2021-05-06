@@ -164,7 +164,7 @@ class Game:
             president_two = input("President 2: ")
         return temp    
         
-    def reverse(self,df2):
+    def reverse(self,filepath):
         """
         Allows the user to put in information about a president and get the president
         name.
@@ -174,7 +174,7 @@ class Game:
         Returns:
             Prints out the president the user is specifing
         """
-        df2 = pd.read_csv("Inst326_Presidents_Info.csv")
+        df2 = pd.read_csv(filepath)
         
         print("Welcome to game 3! I Will guess the President You're thinking of by the information you provide")
 
