@@ -170,7 +170,7 @@ class Game:
         print(answer_1)
         print(temp)
         first_guess = temp["Name of President"].iloc[0]
-        comp_guess_1 = input(f'Is {first_guess} the President you were thinking of?(yes or no)')
+        comp_guess_1 = input(f'Is {first_guess} the President you were thinking of?(yes or no): ')
         return comp_guess_1, temp
     
     def reverse(self,filepath):
@@ -260,7 +260,7 @@ def main():
     ("random president will be given to you and you will have 3 guesses to guess ") +
     ("the correct president. The second option is an interactive expericen where ") +
     ("you will get to choose 2 presidents of the US and see how they differ. The third ") +
-    ("choice is when you get to give the information fo a president and we guess ") +
+    ("choice is when you get to give the information for a president and we guess ") +
     ("the president you are talking about.\n"))
     
     game_choice = input("Please type 1 for option 1, 2 for option 2 or 3 for option 3:")
