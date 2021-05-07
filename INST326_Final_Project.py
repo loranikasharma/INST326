@@ -167,8 +167,6 @@ class Game:
     def questions(self, question,col,df):
         answer_1 = input(question)
         temp = df[df[col] == answer_1]
-        print(answer_1)
-        print(temp)
         first_guess = temp["Name of President"].iloc[0]
         comp_guess_1 = input(f'Is {first_guess} the President you were thinking of?(yes or no): ')
         return comp_guess_1, temp
