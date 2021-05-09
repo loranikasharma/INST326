@@ -165,6 +165,19 @@ class Game:
         return temp    
     
     def questions(self, question,col,df):
+        """
+        Allows the user to provide information of a president, that the computer
+        must guess
+        
+        Args:
+            A question (user input response to question)
+            a column from the dataframe
+            the dataframe
+        Side Effect:
+            guesses a president based off of the information provided
+        Returns:
+            a president guess from the temp dataframe
+        """
         answer_1 = input(question)
         temp = df[df[col] == answer_1]
         first_guess = temp["Name of President"].iloc[0]
