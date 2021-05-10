@@ -197,7 +197,7 @@ class Game:
             None
         """
         question_col = [('What Party are they Affiliated with? (Please capitalize the first letter): ',"Party Affiliation","I think I have an idea.."),
-                        ('Which state were they born in?',"State of Origin","I think I have my guess... but to be sure..."),
+                        ('Which state were they born in?(Two letter abriviation)',"State of Origin","I think I have my guess... but to be sure..."),
                         ('What is his date of birth (format MM-DD-YYYY)?: ',"Date of Birth","I'll try better next time. Good game!")]
 
         df2 = pd.read_csv(filepath)
