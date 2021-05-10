@@ -64,22 +64,6 @@ def test_questions():
         print(df)
         var1, var2 = game1.questions("","Party Affiliation", df)
     
-    
-# def test_reverse(capsys):
-    
-#     """Tests the reverse method to make sure the output is correct and edge cases have proper error messages
-#     """
-    
-    
-#     game1 = pro.Game("Trial 1")
-    
-#     with mock.patch("builtins.input", side_effect= ["Democratic Party", "no", "NJ", "no", "03-18-1837", "yes"]):
-#         game1.reverse("Inst326_Presidents_Info.csv")
-#         outerr = capsys.readouterr()
-#         out = outerr.out()
-#         print(out)
-#         assert out == "Welcome to game 3! I Will guess the President You're thinking of by the information you provide"
-
 
 def test_get_score():
     player = pro.User("Jay",10)
